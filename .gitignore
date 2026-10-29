@@ -36,3 +36,6 @@ pnpm-debug.log*
 # vercel & netlify
 .vercel
 .netlify
+
+# local npm config
+.npmrc
