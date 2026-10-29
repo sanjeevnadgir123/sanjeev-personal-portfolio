@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+/* ───────────────────────────── Sanjeev Nadgir design system ───────────────────────────── */
+
+@theme {
+  --color-ink: #0b0b0d;
+  --color-ink-2: #111114;
+  --color-ink-3: #18181c;
+  --color-paper: #f7f5f2;
+  --color-coral: #ff3f6c;
+  --color-mute: #8f8a85;
+  --color-line: rgb(247 245 242 / 0.12);
+  --color-line-strong: rgb(247 245 242 / 0.22);
+
+  --font-sans: var(--font-geist), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), "Instrument Serif", "Cormorant Garamond", "Times New Roman", serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --ease-cine: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-cine: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --text-display: clamp(2.75rem, 6.5vw, 6.5rem);
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    color-scheme: dark;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-ink);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-coral);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-coral);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Sections reached via the nav clear the fixed header. */
+  section[id] {
+    scroll-margin-top: 4rem;
+  }
+}
+
+@layer components {
+  /* Mono micro-label used for eyebrows, indices and metadata. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  /* A clipping mask for line / letter reveals. */
+  .mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.06em;
+    margin-bottom: -0.06em;
+  }
+
+  .mask-inline {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
+  /* Viewfinder corner brackets — the cinematic motif shared by every frame. */
+  .viewfinder {
+    position: absolute;
+    inset: 0.875rem;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--vf, rgb(247 245 242 / 0.55)) 0 0) top left / 16px 1px,
+      linear-gradient(var(--vf, rgb(247 245 242 / 0.55)) 0 0) top left / 1px 16px,
+      linear-gradient(var(--vf, rgb(247 245 242 / 0.55)) 0 0) top right / 16px 1px,
+      linear-gradient(var(--vf, rgb(247 245 242 / 0.55)) 0 0) top right / 1px 16px,
+      linear-gradient(var(--vf, rgb(247 245 242 / 0.55)) 0 0) bottom left / 16px 1px,
+      linear-gradient(var(--vf, rgb(247 245 242 / 0.55)) 0 0) bottom left / 1px 16px,
+      linear-gradient(var(--vf, rgb(247 245 242 / 0.55)) 0 0) bottom right / 16px 1px,
+      linear-gradient(var(--vf, rgb(247 245 242 / 0.55)) 0 0) bottom right / 1px 16px;
+    background-repeat: no-repeat;
+  }
+
+  /* Soft coral key light, echoing the rim light in the film. */
+  .coral-light {
+    pointer-events: none;
+    background: radial-gradient(closest-side, rgb(255 63 108 / 0.22), rgb(255 63 108 / 0.06) 55%, transparent 75%);
+    filter: blur(20px);
+  }
+
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(247 245 242 / 0.35);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 40px rgba(255, 63, 108, 0.18), 0 2px 24px rgba(11, 11, 13, 0.95);
+  }
+
+  /* Film grain over the whole site; very low opacity, never intercepts input. */
+  .grain {
+    position: fixed;
+    inset: -50%;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .grain {
+      animation: grain-shift 1.2s steps(6) infinite;
+    }
+  }
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -3%); }
+  60% { transform: translate(-2%, -1%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes scroll-cue {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(220%); }
+}
+
+.scroll-cue-dot {
+  animation: scroll-cue 2.2s var(--ease-in-out-cine) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue-dot { animation: none; }
+}
+
+/*
+  Hero pre-reveal states. Applied only when JS is running (`.js` is set by an
+  inline script before paint) and the user allows motion, so there is never a
+  flash of content before GSAP takes over. If scripts fail, a fail-safe
+  animation reveals everything after 4s; without JS nothing is hidden at all.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-hero="frame"] { clip-path: inset(16% 24% 16% 24%); opacity: 0; }
+  .js [data-hero="rise"] { transform: translateY(112%); }
+  .js [data-hero="fade"] { opacity: 0; }
+  .js [data-hero] { animation: hero-failsafe 0.01s linear 4s forwards; }
+}
+
+@keyframes hero-failsafe {
+  to { clip-path: inset(0 0 0 0); transform: none; opacity: 1; }
+}

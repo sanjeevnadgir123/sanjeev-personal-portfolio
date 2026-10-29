@@ -1,46 +1,45 @@
-# Sanjeevkumar Anil Nadgir — Portfolio Website
+# Sanjeev Nadgir — Professional Developer Portfolio
 
-A futuristic, high-performance portfolio website built for an AI Engineer, Machine Learning Engineer, Embedded Systems Specialist, and Full Stack Developer. It features rich visual aesthetics, interactive canvas animations, an AI chatbot, and a custom schematic stack architecture.
+Next.js (App Router) · React 19 · TypeScript · Tailwind CSS v4 · GSAP + ScrollTrigger · Motion (Framer Motion) · Lucide
 
-## 🚀 Live Demo & Hosting
-The project is set up to deploy instantly to hosting platforms like **Vercel** or **Netlify**.
+Personal portfolio for **Sanjeev Nadgir** (Sanjeevkumar Anil Nadgir) — final-year Electronics and Communication Engineering student, software developer, AI/ML enthusiast, and Co-Founder & CEO at Geminal Studio.
 
-## ✨ Key Features
-- **Neural Network Canvas Backdrop**: Interactive nodes and connection lines built on HTML5 Canvas.
-- **Schematic Tech Arsenal**: Skills structured like a system architecture stack (Application -> Logic -> Data -> Hardware).
-- **AI Chatbot**: Client-side interactive chatbot trained with a custom portfolio knowledge base to answer questions about skills, projects, and contact info.
-- **Futuristic UI**: Customized cursor trailing, dynamic spotlight glows, glassmorphic layout cards, scroll progress indicators, and neon accents.
-- **Fully Responsive**: Optimized for fluid viewports from desktops down to mobile screens.
+## Run it
 
-## 🛠️ Tech Stack
-- **Frontend Core**: HTML5, Vanilla CSS3, Javascript (ES6+)
-- **Build & Development Server**: Vite (Node.js)
-- **Deployment**: Configured for Vercel / Netlify
-
----
-
-## 💻 Local Setup and Running
-
-Ensure you have [Node.js](https://nodejs.org/) installed.
-
-### 1. Install Dependencies
 ```bash
 npm install
+npm run dev        # http://localhost:3000
+npm run build && npm start
+npm run lint
+npm run typecheck
 ```
 
-### 2. Start Local Development Server
-Starts the hot-reloading dev server at `http://localhost:5173`:
-```bash
-npm run dev
-```
+Requires Node 20+. Fonts (Instrument Serif, Geist, Geist Mono) load via `next/font/google` at build time.
 
-### 3. Compile for Production Build
-Bundles and optimizes code into the `dist/` directory:
-```bash
-npm run build
-```
+## Contact Details & Configuration
 
-### 4. Preview Production Build Locally
-```bash
-npm run preview
+Configured in `src/lib/site.ts`:
+- **Email:** `sanjeevnadgir2005@gmail.com`
+- **Phone:** `+91 9611103853`
+- **Location:** Mundgod, Karnataka, India
+- **Startup:** Geminal Studio (Co-Founder & CEO)
+- **Education:** AGM Rural College of Engineering and Technology, Hubballi (VTU)
+
+## Architecture
+
+```
+src/
+  app/
+    layout.tsx                  fonts, metadata, pre-paint `.js` flag
+    page.tsx                    Hero → Work → About → StartupLeadership → EducationAchievements → Skills → Process → Contact
+    work/[slug]/page.tsx        statically generated project pages (dynamicParams = false)
+    work/template.tsx           Motion page-enter transition
+    not-found.tsx, icon.svg, globals.css (design tokens)
+  components/
+    sections/                   Hero, Work, About, StartupLeadership, EducationAchievements, Skills, Process, Contact
+    ui/                         CinematicVideo, Button, ProjectVisual (custom SVG key art)
+    SiteNav.tsx, SiteFooter.tsx, SiteShell.tsx, Providers.tsx
+  lib/
+    site.ts                     verified personal, contact, education, startup, and achievement data
+    projects.ts                 verified project details (Redis Java, EchoMind, Smart Medicine Box, IntelliMind)
 ```
